@@ -22,7 +22,9 @@ class App extends Component {
     this.state={
       input:'',
       imageUrl:'',
-      box:{}
+      box:{},
+      route:'signin',
+      isSignedIn:false
     }
   }
   
@@ -67,17 +69,40 @@ class App extends Component {
 
   }
 
+  onRouteChange = (route) => {
+    if(route === 'signin'){
+      this.setState({isSignedIn:false})
+    }
+    else if(route === 'home'){
+      this.setState({isSignedIn:true})
+    }
+    this.setState({route:route});
+
+  }
+
   render(){
+    const {route,isSignedIn,imageUrl,box} = this.state;
     return (
       <div className="App">
         <ParticlesBg color="#ffffff" num={100} alpha={[0.9, 0]} type="cobweb" bg={true} />
-        <Navigation />
-        <Signin />
-        <Register />
-        <Logo />
-        <Rank />
-        <ImageLinkForm  onInputChange={this.onInputChange} onButtonSubmit={this.onButtonSubmit}/>
-        <FaceRecognition imageUrl={this.state.imageUrl} box={this.state.box}/>
+        <Navigation isSignedIn={isSignedIn} onRouteChange={this.onRouteChange}/>
+        {
+          (route==='home')
+          ?
+          <div>
+            <Logo />
+            <Rank />
+            <ImageLinkForm  onInputChange={this.onInputChange} onButtonSubmit={this.onButtonSubmit}/>
+            <FaceRecognition imageUrl={imageUrl} box={box}/>
+          </div>
+          :
+          ((route === 'signin')
+          ?
+          <Signin onRouteChange={this.onRouteChange}/>
+          :
+          <Register onRouteChange={this.onRouteChange}/>
+          )
+        }
       </div>
     );
   }
