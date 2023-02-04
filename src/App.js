@@ -7,6 +7,7 @@ import ImageLinkForm from './Components/ImageLinkForm/ImageLinkForm';
 import Rank from './Components/Rank/Rank';
 import FaceRecognition from './Components/FaceRecognition/FaceRecognition';
 import { Component } from 'react';
+import Signin from './Components/Signin/Signin';
 
 // const app = new Clarifai.App({
 //   apiKey: '4cae014b57964844b259fe0a988be7e9',
@@ -70,6 +71,8 @@ class App extends Component {
       <div className="App">
         <ParticlesBg color="#ffffff" num={100} alpha={[0.9, 0]} type="cobweb" bg={true} />
         <Navigation />
+        <Signin />
+        {/* <Register /> */}
         <Logo />
         <Rank />
         <ImageLinkForm  onInputChange={this.onInputChange} onButtonSubmit={this.onButtonSubmit}/>
