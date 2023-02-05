@@ -65,14 +65,14 @@ class App extends Component {
 
     fetch('http://localhost:3000/imageurl', {
       method: 'put',
-      headers : {'Content-Type': 'application/json'},
+      headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({
-        input:this.state.input
-      })
+        input: this.state.input
+    })
     })
     .then(response => response.json())
     .then(response => {
-      if(response){
+      if (response) {
         fetch('http://localhost:3000/image', {
           method: 'put',
           headers: {'Content-Type': 'application/json'},
@@ -80,10 +80,12 @@ class App extends Component {
             id: this.state.user.id
           })
         })
-        .then(response => response.json())
-        .then(count => {
-          this.setState(Object.assign(this.state.user, {entries:count}))
-        })
+          .then(response => response.json())
+          .then(count => {
+            this.setState(Object.assign(this.state.user, { entries: count}))
+          })
+          .catch(console.log);
+
       }
       this.displayFaceBox(this.calculateFaceLocation(response))
     })
