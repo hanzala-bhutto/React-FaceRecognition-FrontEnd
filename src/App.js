@@ -9,24 +9,27 @@ import { Component } from 'react';
 import Signin from './Components/Signin/Signin';
 import Register from './Components/Register/Register';
 
+const initialState = {
+  input : '',
+  imageUrl : '',
+  box: {},
+  route: 'signin',
+  isSignedIn: false,
+  user : {
+    id: '',
+    name: '',
+    email:'',
+    entries:'',
+    joined: ''
+  }
+};
+
+
 class App extends Component {
   
   constructor(){
     super();
-    this.state={
-      input:'',
-      imageUrl:'',
-      box:{},
-      route:'signin',
-      isSignedIn:false,
-      user:{
-        id: '',
-        name: '',
-        email: '',
-        entries: '',
-        joined: ''
-      }
-    }
+    this.state=initialState;
   }
   
   loadUser = (userData) => {
@@ -94,7 +97,7 @@ class App extends Component {
 
   onRouteChange = (route) => {
     if(route === 'signin'){
-      this.setState({isSignedIn:false})
+      this.setState(initialState)
     }
     else if(route === 'home'){
       this.setState({isSignedIn:true})
@@ -104,7 +107,7 @@ class App extends Component {
   }
 
   render(){
-    const {route,isSignedIn,imageUrl,box} = this.state;
+    const {route,isSignedIn,input,box} = this.state;
     return (
       <div className="App">
         <ParticlesBg color="#ffffff" num={100} alpha={[0.9, 0]} type="cobweb" bg={true} />
@@ -114,9 +117,9 @@ class App extends Component {
           ?
           <div>
             <Logo />
-            <Rank />
+            <Rank name = {this.state.user.name} entries = {this.state.user.entries}/>
             <ImageLinkForm  onInputChange={this.onInputChange} onButtonSubmit={this.onButtonSubmit}/>
-            <FaceRecognition imageUrl={imageUrl} box={box}/>
+            <FaceRecognition imageUrl={input} box={box}/>
           </div>
           :
           ((route === 'signin')
