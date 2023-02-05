@@ -1,6 +1,5 @@
 import './App.css';
 import ParticlesBg from 'particles-bg';
-// import Clarifai from 'clarifai';
 import Navigation from './Components/Navigation/Navigation';
 import Logo from './Components/Logo/Logo';
 import ImageLinkForm from './Components/ImageLinkForm/ImageLinkForm';
@@ -9,11 +8,6 @@ import FaceRecognition from './Components/FaceRecognition/FaceRecognition';
 import { Component } from 'react';
 import Signin from './Components/Signin/Signin';
 import Register from './Components/Register/Register';
-
-// const app = new Clarifai.App({
-//   apiKey: '4cae014b57964844b259fe0a988be7e9',
-// });
-
 
 class App extends Component {
   
@@ -24,7 +18,14 @@ class App extends Component {
       imageUrl:'',
       box:{},
       route:'signin',
-      isSignedIn:false
+      isSignedIn:false,
+      user:{
+        id: '',
+        name: '',
+        email: '',
+        entries: '',
+        joined: ''
+      }
     }
   }
   
@@ -53,17 +54,7 @@ class App extends Component {
     console.log('click');
     this.setState({imageUrl:this.state.input});
 
-    // app.models
-    // .predict(
-    //   {
-    //     id: 'face-detection',
-    //     name: 'face-detection',
-    //     version: '6dc7e46bc9124c5c8824be4822abe105',
-    //     type: 'visual-detector',
-    //   }, req.body.input)
-    //   .then(data => {
-    //     this.displayFaceBox(calculateFaceLocation(data));
-    //   })
+    
     //   .catch(err => console.log(err));
 
 
